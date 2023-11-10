@@ -25,7 +25,13 @@
 - step:
     name: output-date
     image: python:3.9
-    command: cat
+    command:
+      - cat {parameter-value:filename}
+    parameters:
+      - name: filename
+        description: Name of the file containing the date
+        type: string
+        default: /valohai/inputs/date-file
     inputs:
       - name: date-file
 
