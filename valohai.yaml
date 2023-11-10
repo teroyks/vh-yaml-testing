@@ -14,35 +14,3 @@
       devices:
         nvidia.com/gpu: 1
         nvidia.com/cpu: 2
-- step:
-    name: store-date
-    image: python:3.9
-    command:
-      - date > /valohai/outputs/current_date.txt
-    resources:
-      cpu:
-        min: 0.5
-- step:
-    name: output-date
-    image: python:3.9
-    command:
-      - cat {parameter-value:filename}
-    parameters:
-      - name: filename
-        description: Name of the file containing the date
-        type: string
-        default: /valohai/inputs/date-file
-    inputs:
-      - name: date-file
-
-- pipeline:
-    name: sample-pipeline
-    nodes:
-      - name: store-node
-        step: store-date
-        type: execution
-      - name: output-node
-        step: output-date
-        type: execution
-    edges:
-      - [store-node.output.current_date.txt, output-node.input.date-file]
