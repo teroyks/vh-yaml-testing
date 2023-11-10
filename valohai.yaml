@@ -14,3 +14,59 @@
       devices:
         nvidia.com/gpu: 1
         nvidia.com/cpu: 2
+
+- step:
+    name: pre_step
+    image: python:3.10
+    command:
+      - pip install valohai-utils
+      - python ./preprocess.py
+    parameters:
+      - name: exec_id
+        type: string
+        default: 'id_123'
+      - name: pre_param
+        type: integer
+        default: 5
+    inputs:
+      - name: pre_dataset
+        default: https://valohaidemo.blob.core.windows.net/mnist/mnist.npz
+
+- step:
+    name: train_step
+    image: python:3.10
+    command:
+      - pip install valohai-utils
+      - python ./train.py
+    parameters:
+      - name: exec_id
+        type: string
+        default: 'id_123'
+      - name: train_param
+        type: integer
+        default: 5
+    inputs:
+      - name: dataset
+        default: https://valohaidemo.blob.core.windows.net/mnist/mnist.npz
+        optional: true
+
+- pipeline:
+    name: Example for Pipeline Task
+    parameters:
+      - name: id
+        targets:
+          - preprocess.parameters.exec_id
+          - train.parameters.exec_id
+        default: 'id_123'
+    nodes:
+      - name: preprocess
+        step: pre_step
+        type: execution
+      - name: train
+        step: train_step
+        type: execution
+        override:
+          inputs:
+            - name: dataset
+    edges:
+      - [preprocess.output.preprocessed_mnist.npz, train.input.dataset]
