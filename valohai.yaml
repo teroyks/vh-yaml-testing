@@ -1,5 +1,5 @@
 - step:
-    name: hello-job
+    name: hello-with-resources
     image: python:3.9
     command:
       - pip install -r requirements.txt
@@ -14,3 +14,9 @@
       devices:
         nvidia.com/gpu: 1
         nvidia.com/cpu: 2
+- step:
+    name: hello-no-resources
+    image: python:3.9
+    command:
+      - pip install -r requirements.txt
+      - python ./hello.py {parameters}
