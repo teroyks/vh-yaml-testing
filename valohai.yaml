@@ -34,7 +34,7 @@
     command:
       - pip install -r requirements.txt
       - python ./hello.py {parameters}
-    environment: 018a889b-0b00-12bf-7a36-75594dd59753
+    environment: local-kubernetes-mimosa
     runtime-config-preset: valid-preset
 - step:
     name: preset-2-only-preset
