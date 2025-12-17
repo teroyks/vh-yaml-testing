@@ -28,3 +28,31 @@
       - pip install -r requirements.txt
       - python ./hello.py {parameters}
     environment: 018a889b-0b00-12bf-7a36-75594dd59753
+- step:
+    name: preset-valid
+    image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./hello.py {parameters}
+    environment: 018a889b-0b00-12bf-7a36-75594dd59753
+    runtime-config-preset: valid-preset
+- step:
+    name: preset-2-only-preset
+    image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./hello.py {parameters}
+    environment: 018a889b-0b00-12bf-7a36-75594dd59753
+    runtime-config-preset: second-test
+- step:
+    name: preset-2-with-custom-memory
+    image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./hello.py {parameters}
+    environment: 018a889b-0b00-12bf-7a36-75594dd59753
+    runtime-config-preset: second-test
+    resources:
+      memory:
+        min: 50
+        max: 100
