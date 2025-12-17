@@ -56,3 +56,12 @@
       memory:
         min: 50
         max: 100
+- step:
+    name: preset-2-with-id
+    image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+    command:
+      - pip install -r requirements.txt
+      - python ./hello.py {parameters}
+    environment: 018a889b-0b00-12bf-7a36-75594dd59753
+    # preset: second-test
+    runtime-config-preset: 018c204b-aeb7-6576-da89-61e55b1c6a1f
