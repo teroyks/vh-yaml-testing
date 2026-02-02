@@ -72,4 +72,7 @@
       - name: run-preset-step
         type: execution
         step: preset-2-only-preset
+        override:
+          environment: local-kubernetes-mimosa
+          runtime-config-preset: valid-preset
     edges: []
