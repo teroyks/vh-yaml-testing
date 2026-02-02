@@ -65,3 +65,11 @@
     environment: 018a889b-0b00-12bf-7a36-75594dd59753
     # preset: second-test
     runtime-config-preset: 018c204b-aeb7-6576-da89-61e55b1c6a1f
+
+- pipeline:
+    name: test-environment-preset
+    nodes:
+      - name: run-preset-step
+        type: execution
+        step: preset-2-only-preset
+    edges: []
